@@ -1,22 +1,44 @@
-name: Build-EVOLVE-Client-v0.3.3
+name: Build Client Mod
+
 on:
-  workflow_dispatch:
   push:
-    branches: [ main, master ]
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
-      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Set up Gradle 8.10.2
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.10.2'
-      - run: gradle build --stacktrace
-      - uses: actions/upload-artifact@v4
+
+      - name: Build Client Mod
+        run: gradle build
+
+      - name: Show generated JARs
+        run: |
+          echo "=== Generated JARs ==="
+          find build/libs -maxdepth 1 -type f -name "*.jar" -print
+
+      - name: Upload Client Mod
+        uses: actions/upload-artifact@v4
         with:
-          name: project-evolve-client-0.3.3
-          path: build/libs/project-evolve-client-0.3.3.jar
+          name: Project-EVOLVE-Client
+          path: build/libs/*.jar
+          if-no-files-found: error
