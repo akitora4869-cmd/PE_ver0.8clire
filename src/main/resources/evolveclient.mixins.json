@@ -1,0 +1,7 @@
+{
+  "required": true,
+  "package": "jp.evolvegame.client.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "client": ["PlayerEntityRendererMixin", "InGameHudMixin"],
+  "injectors": {"defaultRequire": 1}
+}

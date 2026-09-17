@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "evolveclient",
+  "version": "${version}",
+  "name": "Project EVOLVE Client",
+  "description": "Client renderer and camera companion for Project EVOLVE.",
+  "authors": ["ProjectEVOLVE"],
+  "environment": "client",
+  "entrypoints": {
+    "client": ["jp.evolvegame.client.EvolveClient"]
+  },
+  "mixins": ["evolveclient.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.16.5",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
